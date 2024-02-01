@@ -11,10 +11,12 @@ const start = async () => {
   console.log(`Welcome to the File Manager, ${userName}!`)
   rl.on('line', (command) => {
     if (command === '.exit') {
-      console.log(`Thank you for using File Manager, ${userName}, goodbye!`)
       return rl.close()
     }
     console.log('your command is ', command)
+  })
+  rl.on('close', () => {
+    console.log(`Thank you for using File Manager, ${userName}, goodbye!`)
   })
 }
 
