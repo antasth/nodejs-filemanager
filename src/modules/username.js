@@ -1,4 +1,4 @@
-const parseArgs = async () => {
+const parseUserName = async () => {
   const regexp = /^--username=/
   let userName = null
 
@@ -10,4 +10,4 @@ const parseArgs = async () => {
   return userName ?? 'noname'
 }
 
-export { parseArgs }
+export { parseUserName }
