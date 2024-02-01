@@ -1,6 +1,7 @@
 import readline from 'readline'
 import { parseUserName } from './modules/username.js'
 import { handler } from './modules/handler.js'
+import { printHomeDir } from './modules/homedir.js'
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -10,6 +11,7 @@ const rl = readline.createInterface({
 const start = async () => {
   const userName = await parseUserName()
   console.log(`Welcome to the File Manager, ${userName}!`)
+  printHomeDir()
   rl.on('line', (command) => {
     if (command === '.exit') {
       return rl.close()
