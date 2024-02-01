@@ -1,0 +1,21 @@
+{
+  "name": "nodejs-filemanager",
+  "version": "1.0.0",
+  "description": "RSSchool nodejs course task - File Manager",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antasth/nodejs-filemanager"
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "filemanager"
+  ],
+  "author": "Anton Astashov <antasth@mail.ru>",
+  "license": "ISC"
+}
