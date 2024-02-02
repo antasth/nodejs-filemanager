@@ -12,7 +12,11 @@ const listCurrentDir = async () => {
       return { filename: file.name, type }
     })
 
-    console.table(filesList.sort((a, b) => (a.type > b.type ? 1 : -1)))
+    console.table(
+      filesList.sort(
+        (a, b) => a.type.localeCompare(b.type) || a.filename - b.filename
+      )
+    )
   } catch (error) {
     throw new Error(error)
   }
