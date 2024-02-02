@@ -14,7 +14,7 @@ const commandsHandler = async (command) => {
       break
 
     case 'cd':
-      const path = command.split(' ')[1]
+      const path = command.replace(/^[^ ]* /, '')
       await changeDir(path)
       break
 
