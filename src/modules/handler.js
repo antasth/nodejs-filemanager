@@ -1,8 +1,8 @@
-import { printHomeDir } from './homedir.js'
+import { printCurrentDir } from './homedir.js'
 
 const handler = (command) => {
   console.log('your command is ', command)
-  printHomeDir()
+  printCurrentDir()
 }
 
 export { handler }
