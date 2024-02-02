@@ -1,12 +1,11 @@
 import { homedir } from 'os'
 import path from 'path'
 
-const changeDir = (path) => {
-  console.log('path', path)
+const changeDir = async (path) => {
   try {
     process.chdir(path)
   } catch (error) {
-    console.log('Error while changing directory')
+    throw new Error()
   }
 }
 

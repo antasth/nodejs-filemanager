@@ -2,7 +2,6 @@ import { listCurrentDir } from './list.js'
 import { changeDir, printCurrentDir, goToUpperDir } from './dir.js'
 
 const commandsHandler = async (command) => {
-  console.log('your command is ', command)
   const currentCommand = command.split(' ')[0]
 
   switch (currentCommand) {
@@ -16,10 +15,11 @@ const commandsHandler = async (command) => {
 
     case 'cd':
       const path = command.split(' ')[1]
-      changeDir(path)
+      await changeDir(path)
       break
 
     default:
+      console.log('Invalid input')
       break
   }
 
