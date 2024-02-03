@@ -31,4 +31,12 @@ const createFile = async (fileName) => {
   }
 }
 
-export { createFile, readFile }
+const renameFile = async (oldFileName, newFileName) => {
+  try {
+    await fsPromises.rename(oldFileName, newFileName)
+  } catch (error) {
+    throw new Error()
+  }
+}
+
+export { createFile, readFile, renameFile }
