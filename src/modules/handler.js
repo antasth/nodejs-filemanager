@@ -1,8 +1,10 @@
 import { listCurrentDir } from './list.js'
 import { changeDir, printCurrentDir, goToUpperDir } from './dir.js'
+import { readFile } from './read.js'
 
 const commandsHandler = async (command) => {
   const currentCommand = command.split(' ')[0]
+  const currentParam = command.replace(/^[^ ]* /, '')
 
   switch (currentCommand) {
     case 'ls':
@@ -14,8 +16,11 @@ const commandsHandler = async (command) => {
       break
 
     case 'cd':
-      const path = command.replace(/^[^ ]* /, '')
-      await changeDir(path)
+      await changeDir(currentParam)
+      break
+
+    case 'cat':
+      await readFile(currentParam)
       break
 
     default:
