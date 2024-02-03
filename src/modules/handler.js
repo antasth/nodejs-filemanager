@@ -1,7 +1,6 @@
 import { listCurrentDir } from './list.js'
 import { changeDir, printCurrentDir, goToUpperDir } from './dir.js'
-import { readFile } from './read.js'
-import { createFile } from './file.js'
+import { createFile, readFile } from './file.js'
 
 const printInvalidInputMessage = () => {
   console.log('Invalid input')
