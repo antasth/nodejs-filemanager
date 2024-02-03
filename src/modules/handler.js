@@ -1,6 +1,11 @@
 import { listCurrentDir } from './list.js'
 import { changeDir, printCurrentDir, goToUpperDir } from './dir.js'
 import { readFile } from './read.js'
+import { createFile } from './file.js'
+
+const printInvalidInputMessage = () => {
+  console.log('Invalid input')
+}
 
 const commandsHandler = async (command) => {
   const currentCommand = command.split(' ')[0]
@@ -23,8 +28,16 @@ const commandsHandler = async (command) => {
       await readFile(currentParam)
       break
 
+    case 'add':
+      if (command.split(' ').length !== 2) {
+        printInvalidInputMessage()
+        break
+      }
+      await createFile(currentParam)
+      break
+
     default:
-      console.log('Invalid input')
+      printInvalidInputMessage()
       break
   }
 
