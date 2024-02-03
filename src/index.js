@@ -1,7 +1,12 @@
 import readline from 'readline'
-import { printHomeDir, setHomeDir } from './modules/dir.js'
+import { setHomeDir } from './modules/dir.js'
 import { commandsHandler } from './modules/handler.js'
 import { parseUserName } from './modules/username.js'
+import {
+  printGoodbyeMessage,
+  printWelcomeMessage,
+  printHomeDir,
+} from './modules/messages.js'
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -10,7 +15,7 @@ const rl = readline.createInterface({
 
 const start = async () => {
   const userName = await parseUserName()
-  console.log(`Welcome to the File Manager, ${userName}!`)
+  printWelcomeMessage(userName)
   setHomeDir()
   printHomeDir()
   rl.on('line', async (command) => {
@@ -23,7 +28,7 @@ const start = async () => {
       console.log('Operation failed')
     }
   }).on('close', () => {
-    console.log(`Thank you for using File Manager, ${userName}, goodbye!`)
+    printGoodbyeMessage()
   })
 }
 

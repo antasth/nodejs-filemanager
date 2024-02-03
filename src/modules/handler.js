@@ -1,10 +1,7 @@
 import { listCurrentDir } from './list.js'
-import { changeDir, printCurrentDir, goToUpperDir } from './dir.js'
+import { changeDir, goToUpperDir } from './dir.js'
 import { createFile, readFile, renameFile } from './file.js'
-
-const printInvalidInputMessage = () => {
-  console.log('Invalid input')
-}
+import { printInvalidInputMessage, printCurrentDir } from './messages.js'
 
 const commandsHandler = async (command) => {
   const currentCommand = command.split(' ')[0]
