@@ -9,6 +9,7 @@ import {
   removeFile,
 } from './file.js'
 import { printInvalidInputMessage, printCurrentDir } from './messages.js'
+import { printOsEol } from './os.js'
 
 const commandsHandler = async (command) => {
   const currentCommand = command.split(' ')[0]
@@ -71,6 +72,12 @@ const commandsHandler = async (command) => {
       }
       await removeFile(currentParam)
       break
+
+    case 'os':
+      if (commandArgs.length === 2 && commandArgs[1] === '--EOL') {
+        printOsEol()
+        break
+      }
 
     default:
       printInvalidInputMessage()
