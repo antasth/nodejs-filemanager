@@ -16,4 +16,14 @@ const printOsEol = () => {
   console.log(`default system End-Of-Line is ${JSON.stringify(os.EOL)}`)
 }
 
-export { printOsEol }
+const printCpus = () => {
+  const cpus = os.cpus()
+  console.log('Overall amount of CPUS:', cpus.length)
+  cpus.forEach((cpu) => {
+    console.log(
+      `Cpu model ${cpu.model.trim()}, clock rate ${cpu.speed / 1000} GHz`
+    )
+  })
+}
+
+export { printOsEol, printCpus }

@@ -9,7 +9,7 @@ import {
   removeFile,
 } from './file.js'
 import { printInvalidInputMessage, printCurrentDir } from './messages.js'
-import { printOsEol } from './os.js'
+import { printOsEol, printCpus } from './os.js'
 
 const commandsHandler = async (command) => {
   const currentCommand = command.split(' ')[0]
@@ -74,9 +74,15 @@ const commandsHandler = async (command) => {
       break
 
     case 'os':
-      if (commandArgs.length === 2 && commandArgs[1] === '--EOL') {
-        printOsEol()
-        break
+      if (commandArgs.length === 2) {
+        if (commandArgs[1] === '--EOL') {
+          printOsEol()
+          break
+        }
+        if (commandArgs[1] === '--cpus') {
+          printCpus()
+          break
+        }
       }
 
     default:
