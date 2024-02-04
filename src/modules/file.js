@@ -1,5 +1,5 @@
-import fsPromises from 'node:fs/promises'
 import fs from 'node:fs'
+import fsPromises from 'node:fs/promises'
 import path from 'path'
 
 const readFile = async (pathToFile) => {
@@ -39,4 +39,30 @@ const renameFile = async (oldFileName, newFileName) => {
   }
 }
 
-export { createFile, readFile, renameFile }
+const copyFile = async (pathToFile, pathToNewDirectory) => {
+  try {
+    await fsPromises.access(pathToFile)
+
+    await fsPromises.access(pathToNewDirectory).catch(() => {
+      fsPromises.mkdir(pathToNewDirectory)
+    })
+
+    const fullPathToNewDirectory = path.resolve(
+      pathToNewDirectory,
+      path.basename(pathToFile)
+    )
+
+    const readStream = fs.createReadStream(pathToFile)
+    const writeStream = fs.createWriteStream(fullPathToNewDirectory)
+
+    readStream.pipe(writeStream)
+
+    readStream.on('end', () => {
+      writeStream.close()
+    })
+  } catch (error) {
+    throw new Error()
+  }
+}
+
+export { copyFile, createFile, readFile, renameFile }

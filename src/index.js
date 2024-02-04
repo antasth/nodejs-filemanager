@@ -28,7 +28,7 @@ const start = async () => {
       console.log('Operation failed')
     }
   }).on('close', () => {
-    printGoodbyeMessage()
+    printGoodbyeMessage(userName)
   })
 }
 

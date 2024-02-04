@@ -17,13 +17,4 @@ const setHomeDir = () => {
   process.chdir(homedir())
 }
 
-// const printHomeDir = () => {
-//   console.log(`You are currently in ${homedir()}`)
-// }
-
-// const printCurrentDir = () => {
-//   console.log(`You are currently in ${process.cwd()}`)
-// }
-
 export { setHomeDir, changeDir, goToUpperDir }
-// export { printHomeDir, printCurrentDir, setHomeDir, changeDir, goToUpperDir }
