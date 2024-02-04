@@ -9,7 +9,13 @@ import {
   removeFile,
 } from './file.js'
 import { printInvalidInputMessage, printCurrentDir } from './messages.js'
-import { printOsEol, printCpus, printHomeDir, printUserName } from './os.js'
+import {
+  printOsEol,
+  printCpus,
+  printHomeDir,
+  printUserName,
+  printCpuArchitecture,
+} from './os.js'
 
 const commandsHandler = async (command) => {
   const currentCommand = command.split(' ')[0]
@@ -89,6 +95,10 @@ const commandsHandler = async (command) => {
         }
         if (commandArgs[1] === '--username') {
           printUserName()
+          break
+        }
+        if (commandArgs[1] === '--architecture') {
+          printCpuArchitecture()
           break
         }
       }

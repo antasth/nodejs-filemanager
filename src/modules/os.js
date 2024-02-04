@@ -34,4 +34,14 @@ const printUserName = () => {
   console.log(os.userInfo().username)
 }
 
-export { printOsEol, printCpus, printHomeDir, printUserName }
+const printCpuArchitecture = () => {
+  console.log(os.arch())
+}
+
+export {
+  printOsEol,
+  printCpus,
+  printHomeDir,
+  printUserName,
+  printCpuArchitecture,
+}
