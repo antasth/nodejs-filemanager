@@ -29,4 +29,9 @@ const printCpus = () => {
 const printHomeDir = () => {
   console.log(homedir())
 }
-export { printOsEol, printCpus, printHomeDir }
+
+const printUserName = () => {
+  console.log(os.userInfo().username)
+}
+
+export { printOsEol, printCpus, printHomeDir, printUserName }
