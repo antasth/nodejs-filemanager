@@ -10,7 +10,7 @@
 // Get CPU architecture for which Node.js binary has compiled and print it to console
 // os --architecture
 
-import os from 'os'
+import os, { homedir } from 'os'
 
 const printOsEol = () => {
   console.log(`default system End-Of-Line is ${JSON.stringify(os.EOL)}`)
@@ -26,4 +26,7 @@ const printCpus = () => {
   })
 }
 
-export { printOsEol, printCpus }
+const printHomeDir = () => {
+  console.log(homedir())
+}
+export { printOsEol, printCpus, printHomeDir }
