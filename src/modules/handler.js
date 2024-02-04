@@ -16,6 +16,7 @@ import {
   printUserName,
   printCpuArchitecture,
 } from './os.js'
+import { hashCalculation } from './hash.js'
 
 const commandsHandler = async (command) => {
   const currentCommand = command.split(' ')[0]
@@ -102,6 +103,14 @@ const commandsHandler = async (command) => {
           break
         }
       }
+
+    case 'hash':
+      if (commandArgs.length !== 2) {
+        printInvalidInputMessage()
+        break
+      }
+      await hashCalculation(currentParam)
+      break
 
     default:
       printInvalidInputMessage()
