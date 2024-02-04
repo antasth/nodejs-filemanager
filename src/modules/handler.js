@@ -17,7 +17,7 @@ import {
   printCpuArchitecture,
 } from './os.js'
 import { hashCalculation } from './hash.js'
-import { compress } from './compress.js'
+import { compress, decompress } from './compress.js'
 
 const commandsHandler = async (command) => {
   const currentCommand = command.split(' ')[0]
@@ -119,6 +119,14 @@ const commandsHandler = async (command) => {
         break
       }
       await compress(...currentParam.split(' '))
+      break
+
+    case 'decompress':
+      if (commandArgs.length !== 3) {
+        printInvalidInputMessage()
+        break
+      }
+      await decompress(...currentParam.split(' '))
       break
 
     default:
