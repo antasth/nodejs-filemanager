@@ -65,4 +65,31 @@ const copyFile = async (pathToFile, pathToNewDirectory) => {
   }
 }
 
-export { copyFile, createFile, readFile, renameFile }
+const moveFile = async (pathToFile, pathToNewDirectory) => {
+  try {
+    await fsPromises.access(pathToFile)
+
+    await fsPromises.access(pathToNewDirectory).catch(() => {
+      fsPromises.mkdir(pathToNewDirectory)
+    })
+
+    const fullPathToNewDirectory = path.resolve(
+      pathToNewDirectory,
+      path.basename(pathToFile)
+    )
+
+    const readStream = fs.createReadStream(pathToFile)
+    const writeStream = fs.createWriteStream(fullPathToNewDirectory)
+
+    readStream.pipe(writeStream)
+
+    readStream.on('end', () => {
+      fsPromises.unlink(pathToFile)
+      writeStream.close()
+    })
+  } catch (error) {
+    throw new Error()
+  }
+}
+
+export { copyFile, createFile, readFile, renameFile, moveFile }
