@@ -1,6 +1,13 @@
 import { listCurrentDir } from './list.js'
 import { changeDir, goToUpperDir } from './dir.js'
-import { createFile, readFile, renameFile, copyFile, moveFile } from './file.js'
+import {
+  createFile,
+  readFile,
+  renameFile,
+  copyFile,
+  moveFile,
+  removeFile,
+} from './file.js'
 import { printInvalidInputMessage, printCurrentDir } from './messages.js'
 
 const commandsHandler = async (command) => {
@@ -55,6 +62,14 @@ const commandsHandler = async (command) => {
         break
       }
       await moveFile(...currentParam.split(' '))
+      break
+
+    case 'rm':
+      if (commandArgs.length !== 2) {
+        printInvalidInputMessage()
+        break
+      }
+      await removeFile(currentParam)
       break
 
     default:

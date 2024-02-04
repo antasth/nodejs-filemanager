@@ -92,4 +92,13 @@ const moveFile = async (pathToFile, pathToNewDirectory) => {
   }
 }
 
-export { copyFile, createFile, readFile, renameFile, moveFile }
+const removeFile = async (pathToFile) => {
+  try {
+    await fsPromises.access(pathToFile)
+    await fsPromises.unlink(pathToFile)
+  } catch (error) {
+    throw new Error()
+  }
+}
+
+export { copyFile, createFile, readFile, renameFile, moveFile, removeFile }
