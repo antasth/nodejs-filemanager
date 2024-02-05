@@ -19,9 +19,20 @@ import {
 import { hashCalculation } from './hash.js'
 import { compress, decompress } from './compress.js'
 
+const getParams = (command) => {
+  if (command.split(' ').length === 1) return []
+  const currentParams = command.replace(/^[^ ]* /, '')
+  return currentParams.includes('"')
+    ? currentParams
+        .split('"')
+        .map((str) => str.trim())
+        .filter((str) => str.length)
+    : currentParams.split(' ')
+}
+
 const commandsHandler = async (command) => {
   const currentCommand = command.split(' ')[0]
-  const currentParam = command.replace(/^[^ ]* /, '')
+  const currentParams = getParams(command)
   const commandArgs = command.split(' ')
 
   switch (currentCommand) {
@@ -30,55 +41,67 @@ const commandsHandler = async (command) => {
       break
 
     case 'up':
+      if (currentParams.length) {
+        printInvalidInputMessage()
+        break
+      }
       goToUpperDir()
       break
 
     case 'cd':
-      await changeDir(currentParam)
+      if (currentParams.length !== 1) {
+        printInvalidInputMessage()
+        break
+      }
+      await changeDir(...currentParams)
       break
 
     case 'cat':
-      await readFile(currentParam)
+      if (currentParams.length !== 1) {
+        printInvalidInputMessage()
+        break
+      }
+      await readFile(...currentParams)
       break
 
     case 'add':
-      if (commandArgs.length !== 2) {
+      if (currentParams.length !== 1) {
         printInvalidInputMessage()
         break
       }
-      await createFile(currentParam)
+      await createFile(...currentParams)
       break
 
     case 'rn':
-      if (commandArgs.length !== 3) {
+      if (currentParams.length !== 2) {
         printInvalidInputMessage()
         break
       }
-      await renameFile(...currentParam.split(' '))
+      await renameFile(...currentParams)
       break
 
     case 'cp':
-      if (commandArgs.length !== 3) {
+      if (currentParams.length !== 2) {
         printInvalidInputMessage()
         break
       }
-      await copyFile(...currentParam.split(' '))
+      await copyFile(...currentParams)
       break
 
     case 'mv':
-      if (commandArgs.length !== 3) {
+      if (currentParams.length !== 2) {
         printInvalidInputMessage()
         break
       }
-      await moveFile(...currentParam.split(' '))
+      await moveFile(...currentParams)
       break
 
     case 'rm':
-      if (commandArgs.length !== 2) {
+      if (currentParams.length !== 1) {
         printInvalidInputMessage()
         break
       }
-      await removeFile(currentParam)
+      await removeFile(...currentParams)
       break
 
     case 'os':
@@ -106,27 +129,27 @@ const commandsHandler = async (command) => {
       }
 
     case 'hash':
-      if (commandArgs.length !== 2) {
+      if (currentParams.length !== 1) {
         printInvalidInputMessage()
         break
       }
-      await hashCalculation(currentParam)
+      await hashCalculation(...currentParams)
       break
 
     case 'compress':
-      if (commandArgs.length !== 3) {
+      if (currentParams.length !== 2) {
         printInvalidInputMessage()
         break
       }
-      await compress(...currentParam.split(' '))
+      await compress(...currentParams)
       break
 
     case 'decompress':
-      if (commandArgs.length !== 3) {
+      if (currentParams.length !== 2) {
         printInvalidInputMessage()
         break
       }
-      await decompress(...currentParam.split(' '))
+      await decompress(...currentParams)
       break
 
     default:

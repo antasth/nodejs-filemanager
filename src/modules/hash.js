@@ -3,7 +3,6 @@ import fs from 'node:fs'
 import crypto from 'crypto'
 
 const hashCalculation = async (pathToFile) => {
-  console.log(pathToFile)
   try {
     await fsPromises.access(pathToFile)
 

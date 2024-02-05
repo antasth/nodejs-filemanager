@@ -31,9 +31,11 @@ const createFile = async (fileName) => {
   }
 }
 
-const renameFile = async (oldFileName, newFileName) => {
+const renameFile = async (pathToFile, newFileName) => {
   try {
-    await fsPromises.rename(oldFileName, newFileName)
+    await fsPromises.access(pathToFile)
+
+    await fsPromises.rename(pathToFile, newFileName)
   } catch (error) {
     throw new Error()
   }
@@ -51,7 +53,7 @@ const copyFile = async (pathToFile, pathToNewDirectory) => {
       pathToNewDirectory,
       path.basename(pathToFile)
     )
-
+    console.log('fullPathToNewDirectory', fullPathToNewDirectory)
     const readStream = fs.createReadStream(pathToFile)
     const writeStream = fs.createWriteStream(fullPathToNewDirectory)
 
@@ -59,6 +61,9 @@ const copyFile = async (pathToFile, pathToNewDirectory) => {
 
     readStream.on('end', () => {
       writeStream.close()
+    })
+    writeStream.on('error', () => {
+      console.log('Operation failed')
     })
   } catch (error) {
     throw new Error()
