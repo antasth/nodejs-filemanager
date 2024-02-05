@@ -53,7 +53,6 @@ const copyFile = async (pathToFile, pathToNewDirectory) => {
       pathToNewDirectory,
       path.basename(pathToFile)
     )
-    console.log('fullPathToNewDirectory', fullPathToNewDirectory)
     const readStream = fs.createReadStream(pathToFile)
     const writeStream = fs.createWriteStream(fullPathToNewDirectory)
 
@@ -63,6 +62,9 @@ const copyFile = async (pathToFile, pathToNewDirectory) => {
       writeStream.close()
     })
     writeStream.on('error', () => {
+      console.log('Operation failed')
+    })
+    readStream.on('error', () => {
       console.log('Operation failed')
     })
   } catch (error) {
